@@ -48,7 +48,7 @@ SUM(sales_amount) as total_sales,
 SUM(quantity) as total_quantity,
 COUNT(DISTINCT (order_number)) as total_orders,
 COUNT(DISTINCT (customer_key)) as total_customers,
-(EXTRACT(YEAR FROM MAX(order_date))*12 + Extract (MONTH from MAX(order_date))) - (EXTRACT(YEAR FROM MIN(order_date))*12 + Extract (MONTH from MIN(order_date))) as lifespan,
+(YEAR(MAX(order_date))*12 + MONTH(MAX(order_date))) - (YEAR(MIN(order_date))*12 + MONTH(MIN(order_date))) as lifespan,
 -- ??? avg_selling_price
 ROUND(AVG(sales_amount / NULLIF(quantity,0)),2) as avg_selling_price
 FROM base_query

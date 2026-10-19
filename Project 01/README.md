@@ -72,3 +72,22 @@ referenced a CTE from an already completed statement.
 MySQL references:
 - [Date and time functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
 - [Common table expressions](https://dev.mysql.com/doc/refman/8.0/en/with.html)
+
+## MySQL compatibility verification
+
+The MySQL scripts use `YEAR()` and `MONTH()` for date parts. MySQL also supports
+`EXTRACT()`, but a space between `EXTRACT` and `(` causes a syntax error unless
+`IGNORE_SPACE` is enabled. The scripts do not require `IGNORE_SPACE`.
+
+On 2026-10-19, all seven MySQL files (20 statements) were executed successfully
+on an isolated MySQL 8.0.34 server with `ONLY_FULL_GROUP_BY`, strict date checks,
+and division-by-zero checking enabled. Every file ran against populated sample
+tables and empty tables. Result checks covered customer segmentation, NULL names
+and dates, zero quantities, completed-month lifespan, calendar-month recency and
+product lifespan, average order values, monthly sales, and running totals.
+
+All 14 SQL files were also parsed using their respective SQL dialects.
+PostgreSQL files were unchanged by this MySQL compatibility correction.
+Testing used sample data, not the user's database or production schema.
+
+Reference: [MySQL function name parsing](https://dev.mysql.com/doc/refman/8.0/en/function-resolution.html).

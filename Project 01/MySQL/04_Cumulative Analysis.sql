@@ -22,12 +22,12 @@ FROM
 (
     SELECT
         -- MAKEDATE(YEAR(order_date), 1) AS order_date,
-		EXTRACT(YEAR FROM order_date) AS order_date,
+		YEAR(order_date) AS order_date,
         SUM(sales_amount) AS total_sales,
         AVG(price) AS avg_price
     FROM fact_sales
     WHERE order_date IS NOT NULL
-    GROUP BY EXTRACT(YEAR FROM order_date)
+    GROUP BY YEAR(order_date)
 ) AS t
 ORDER BY order_date;
 

@@ -80,7 +80,7 @@ total_quantity,
 total_product,
 last_order_date,
 lifespan,
- (Extract( Year from CURRENT_DATE) * 12 + EXTRACT (Month from CURRENT_DATE)) - (Extract( Year from last_order_date)*12 + Extract( MONTH from last_order_date)) as recency,
+ (YEAR(CURRENT_DATE) * 12 + MONTH(CURRENT_DATE)) - (YEAR(last_order_date)*12 + MONTH(last_order_date)) as recency,
 CASE 
 	WHEN lifespan >= 12 and total_sales>5000 then 'VIP'
 	WHEN lifespan >= 12 and total_sales<=5000 then 'Regular'
