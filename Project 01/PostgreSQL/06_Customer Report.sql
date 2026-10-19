@@ -95,4 +95,4 @@ CASE
 END as avg_monthly_spend
 
 FROM customer_agregation
-order by recency desc
+order by recency desc;

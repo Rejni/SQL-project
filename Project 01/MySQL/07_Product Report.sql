@@ -1,3 +1,4 @@
+-- Dialect: MySQL 8.0 or later
 -- =============================================================================
 -- Product Report
 -- =============================================================================
@@ -45,7 +46,7 @@ category,
 subcategory,
 SUM(sales_amount) as total_sales,
 SUM(quantity) as total_quantity,
-COUNT (DISTINCT (order_number)) as total_orders,
+COUNT(DISTINCT (order_number)) as total_orders,
 COUNT(DISTINCT (customer_key)) as total_customers,
 (EXTRACT(YEAR FROM MAX(order_date))*12 + Extract (MONTH from MAX(order_date))) - (EXTRACT(YEAR FROM MIN(order_date))*12 + Extract (MONTH from MIN(order_date))) as lifespan,
 -- ??? avg_selling_price
@@ -80,4 +81,4 @@ CASE
 	when lifespan = 0 then 0
 	ELSE ROUND(total_sales / lifespan,2)
 END as avg_monthly_revenue
-from product_agregation
+from product_agregation;
