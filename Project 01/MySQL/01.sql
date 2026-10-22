@@ -1,7 +1,4 @@
--- Dialect: MySQL 8.0 or later
 /*
-===============================================================================
-Magnitude Analysis
 ===============================================================================
 Purpose:
     - To quantify data and group results by specific dimensions.
