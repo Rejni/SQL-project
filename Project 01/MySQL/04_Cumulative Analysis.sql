@@ -1,8 +1,4 @@
--- Dialect: MySQL 8.0 or later
-
 /*
-===============================================================================
-Cumulative Analysis - MySQL 8.0+
 ===============================================================================
 Purpose:
     - To calculate running totals or moving averages.
