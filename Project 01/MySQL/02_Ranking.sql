@@ -1,8 +1,4 @@
--- Dialect: MySQL 8.0 or later
-
 /*
-===============================================================================
-Ranking Analysis - MySQL 8.0+
 ===============================================================================
 Purpose:
     - To rank items (e.g., products, customers) based on performance.
