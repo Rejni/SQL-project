@@ -5,7 +5,7 @@
 ```text
 Project 01/
 ├── PostgreSQL/  # PostgreSQL queries
-├── MySQL/       # Equivalent queries for MySQL 8.0+
+├── MySQL/       # MySQL queries
 └── README.md
 ```
 
@@ -15,11 +15,11 @@ Both dialect folders contain the same files:
 | --- | --- |
 | `01.sql` | Magnitude: customers, products, costs, and revenue |
 | `02_Ranking.sql` | Best and worst products and customers |
-| `03_Time Analysis.sql` | Monthly sales trends |
-| `04_Cumulative Analysis.sql` | Running sales totals and average prices |
-| `05_Segmentation Analysis.sql` | Customer spending and lifespan segments |
-| `06_Customer Report.sql` | Customer metrics and KPIs |
-| `07_Product Report.sql` | Product metrics and KPIs |
+| `03_Time_Analysis.sql` | Monthly sales trends |
+| `04_Cumulative_Analysis.sql` | Running sales totals and average prices |
+| `05_Segmentation_Analysis.sql` | Customer spending and lifespan segments |
+| `06_Customer_Report.sql` | Customer metrics and KPIs |
+| `07_Product_Report.sql` | Product metrics and KPIs |
 
 ## Running the queries
 
