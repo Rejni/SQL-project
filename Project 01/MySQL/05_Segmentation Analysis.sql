@@ -1,8 +1,4 @@
--- Dialect: MySQL 8.0 or later
-
 /*
-===============================================================================
-Data Segmentation Analysis - MySQL 8.0+
 ===============================================================================
 Purpose:
     - To group data into meaningful categories.
