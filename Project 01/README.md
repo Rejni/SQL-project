@@ -1,93 +1,112 @@
-# Project 01: Sales analytics
+# Project 01: SQL Data Analytics — Sales Analysis
 
-## Structure
+A collection of SQL scripts for data exploration, analytics, and reporting, focused on sales performance, customer behavior, and product trends.
+
+This project contains **seven analytical modules implemented in PostgreSQL and MySQL**. Each module focuses on a specific analytical topic, from exploring key business metrics to analyzing time-based trends, customer segmentation, and product performance.
+
+The goal is to practice SQL techniques commonly used in data analytics and business intelligence, while exploring the differences between two relational database systems.
+
+## Project Structure
 
 ```text
 Project 01/
-├── PostgreSQL/  # PostgreSQL queries
-├── MySQL/       # MySQL queries
+├── PostgreSQL/
+│   ├── 01.sql
+│   ├── 02_Ranking.sql
+│   ├── 03_Time_Analysis.sql
+│   ├── 04_Cumulative_Analysis.sql
+│   ├── 05_Segmentation_Analysis.sql
+│   ├── 06_Customer_Report.sql
+│   └── 07_Product_Report.sql
+├── MySQL/
+│   └── [Same seven SQL files]
 └── README.md
 ```
 
-Both dialect folders contain the same files:
+## SQL Analyses
 
-| File | Analysis |
-| --- | --- |
-| `01.sql` | Magnitude: customers, products, costs, and revenue |
-| `02_Ranking.sql` | Best and worst products and customers |
-| `03_Time_Analysis.sql` | Monthly sales trends |
-| `04_Cumulative_Analysis.sql` | Running sales totals and average prices |
-| `05_Segmentation_Analysis.sql` | Customer spending and lifespan segments |
-| `06_Customer_Report.sql` | Customer metrics and KPIs |
-| `07_Product_Report.sql` | Product metrics and KPIs |
+The project covers the following analytical areas:
 
-## Running the queries
+| Analysis | Description |
+|---|---|
+| **01. Magnitude Analysis** | Explore key metrics such as total customers, products, costs, and revenue. |
+| **02. Ranking Analysis** | Identify top-performing and underperforming products and customers. |
+| **03. Time-Based Analysis** | Analyze monthly sales trends and performance over time. |
+| **04. Cumulative Analysis** | Calculate running sales totals and cumulative metrics. |
+| **05. Segmentation Analysis** | Group customers based on spending behavior and lifespan. |
+| **06. Customer Report** | Generate customer-level metrics and KPIs. |
+| **07. Product Report** | Generate product-level metrics and KPIs. |
 
-1. Load your dataset into the selected database. These scripts query existing
-   tables; this repository does not include table definitions or sample data.
-2. Use the same table and column names as the original project:
-   - `dim_customers`: `customer_key`, `customer_number`, `first_name`, `last_name`,
-     `country`, `gender`, `birthdate`.
-   - `dim_product`: `product_key`, `product_name`, `category`, `subcategory`, `cost`.
-   - `fact_sales`: `order_number`, `product_key`, `customer_key`, `order_date`,
-     `sales_amount`, `quantity`, `price`.
-3. Use date-compatible types for `birthdate` and `order_date`, and numeric types
-   for the measures. Use `NUMERIC`/`DECIMAL` for monetary values so averages,
-   division, and rounding use decimal arithmetic.
-4. Open the folder matching your database and run the desired SQL file in your
-   query editor, connected to your database/schema. The files can run independently.
+## Technologies and SQL Concepts
 
-MySQL requires **8.0 or later** for CTEs and window functions. The queries use
-explicit grouping compatible with `ONLY_FULL_GROUP_BY`; changing SQL mode is
-unnecessary. Dates should be valid dates, without MySQL zero-date values.
+**Databases**
+- PostgreSQL
+- MySQL 8.0+
 
-The reports return query results. The optional `CREATE VIEW` line in the customer
-report remains commented out.
+**SQL concepts**
+- Aggregation and grouping
+- Joins and subqueries
+- Common Table Expressions (CTEs)
+- Window functions
+- Date and time functions
+- Ranking and segmentation
+- Analytical reporting
 
-## Dialect differences
+## Dataset
 
-| PostgreSQL | MySQL |
-| --- | --- |
-| `DATE_TRUNC('month', order_date)::date` | `CAST(DATE_FORMAT(order_date, '%Y-%m-01') AS DATE)` |
-| `TO_CHAR(order_date, 'YYYY-Mon')` | `DATE_FORMAT(order_date, '%Y-%b')` |
-| Year/month parts of `AGE(last_date, first_date)` | `TIMESTAMPDIFF(MONTH, first_date, last_date)` |
-| Age in years from `AGE(birthdate)` | `TIMESTAMPDIFF(YEAR, birthdate, CURRENT_DATE)` |
-| `CONCAT(first_name, ' ', last_name)` | `CONCAT(COALESCE(first_name, ''), ' ', COALESCE(last_name, ''))` |
+The project uses a relational sales dataset consisting of three main tables:
 
-The name expression preserves PostgreSQL's treatment of NULL name components.
-Monthly labels depend on the database locale; use matching English locale settings
-for identical abbreviated month names. Session time zones should also match when
-comparing timestamp-based data or reports using the current date.
+| Table | Description | Columns |
+|---|---|---|
+| `dim_customers` | Customer information and demographic attributes used for customer analysis and segmentation. | `customer_key`, `customer_number`, `first_name`, `last_name`, `country`, `gender`, `birthdate` |
+| `dim_product` | Product information, including product classifications and costs, used for product performance analysis. | `product_key`, `product_name`, `category`, `subcategory`, `cost` |
+| `fact_sales` | Sales transactions containing order details, quantities, prices, and revenue. | `order_number`, `product_key`, `customer_key`, `order_date`, `sales_amount`, `quantity`, `price` |
 
-Customer lifespan uses completed months. Customer recency and product lifespan
-retain the original calendar-month subtraction (year × 12 + month), which counts
-month boundaries regardless of the day. These are deliberately different metrics.
-The customer segmentation labels and report calculations are retained from the
-original scripts, including the `Reglar` spelling in the segmentation examples.
+## PostgreSQL vs. MySQL
 
-In both dialects, the second segmentation example repeats its CTE because a CTE
-is visible only to the statement immediately following it. Previously that example
-referenced a CTE from an already completed statement.
+The project implements the same analytical queries in PostgreSQL and MySQL, demonstrating differences in SQL syntax and built-in functions.
 
-MySQL references:
-- [Date and time functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
-- [Common table expressions](https://dev.mysql.com/doc/refman/8.0/en/with.html)
+| Functionality | PostgreSQL | MySQL |
+|---|---|---|
+| Monthly date grouping | `DATE_TRUNC('month', order_date)::date` | `CAST(DATE_FORMAT(order_date, '%Y-%m-01') AS DATE)` |
+| Date formatting | `TO_CHAR(order_date, 'YYYY-Mon')` | `DATE_FORMAT(order_date, '%Y-%b')` |
+| Date differences in months | Year and month components of `AGE(last_date, first_date)` | `TIMESTAMPDIFF(MONTH, first_date, last_date)` |
+| Customer age calculation | `EXTRACT(YEAR FROM AGE(birthdate))` | `TIMESTAMPDIFF(YEAR, birthdate, CURRENT_DATE)` |
+| NULL-safe name concatenation | `CONCAT(first_name, ' ', last_name)` | `CONCAT(COALESCE(first_name, ''), ' ', COALESCE(last_name, ''))` |
 
-## MySQL compatibility verification
+These adaptations help maintain consistent analytical logic across both database systems while accounting for differences in date handling, formatting, and NULL behavior.
 
-The MySQL scripts use `YEAR()` and `MONTH()` for date parts. MySQL also supports
-`EXTRACT()`, but a space between `EXTRACT` and `(` causes a syntax error unless
-`IGNORE_SPACE` is enabled. The scripts do not require `IGNORE_SPACE`.
+**Note:** Date-difference calculations may produce slightly different results in edge cases because PostgreSQL and MySQL handle calendar intervals differently.
 
-On 2026-10-19, all seven MySQL files (20 statements) were executed successfully
-on an isolated MySQL 8.0.34 server with `ONLY_FULL_GROUP_BY`, strict date checks,
-and division-by-zero checking enabled. Every file ran against populated sample
-tables and empty tables. Result checks covered customer segmentation, NULL names
-and dates, zero quantities, completed-month lifespan, calendar-month recency and
-product lifespan, average order values, monthly sales, and running totals.
+The SQL scripts expect these tables and their corresponding columns to exist in the database.
 
-All 14 SQL files were also parsed using their respective SQL dialects.
-PostgreSQL files were unchanged by this MySQL compatibility correction.
-Testing used sample data, not the user's database or production schema.
 
-Reference: [MySQL function name parsing](https://dev.mysql.com/doc/refman/8.0/en/function-resolution.html).
+## Getting Started
+
+1. Set up a PostgreSQL or MySQL database.
+2. Load a compatible sales dataset containing the required tables.
+3. Open the `PostgreSQL` or `MySQL` directory.
+4. Execute the selected SQL script in your SQL editor.
+
+The SQL files can be executed independently, provided the necessary tables and columns are available.
+
+## PostgreSQL vs. MySQL
+
+The project includes equivalent analyses for both database systems, demonstrating differences in SQL syntax and built-in functions.
+
+| Functionality | PostgreSQL | MySQL |
+|---|---|---|
+| Monthly date grouping | `DATE_TRUNC()` | `DATE_FORMAT()` |
+| Date formatting | `TO_CHAR()` | `DATE_FORMAT()` |
+| Date differences | `AGE()` | `TIMESTAMPDIFF()` |
+
+
+Some differences in date calculations, NULL handling, and formatting may affect results. These are accounted for in the corresponding implementations.
+
+
+## Learning Resources
+
+This project is based on the [SQL Data Analyst Portfolio Project](https://www.youtube.com/watch?v=2jGhQpbzHes) tutorial by **Data with Baraa**.
+
+The SQL implementations are organized for PostgreSQL and MySQL to practice analytical querying across both database systems.
+
