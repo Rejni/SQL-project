@@ -1,8 +1,4 @@
--- Dialect: MySQL 8.0 or later
-
 /*
-===============================================================================
-Change Over Time Analysis - MySQL 8.0+
 ===============================================================================
 Purpose:
     - To track trends, growth, and changes in key metrics over time.
