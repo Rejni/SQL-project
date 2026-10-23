@@ -10,6 +10,10 @@ The goal is to practice SQL techniques commonly used in data analytics and busin
 
 ```text
 Project 01/
+├── Database/
+│   ├── dim_customers.csv
+│   ├── dim_products.csv
+│   └── fact_sales.csv
 ├── PostgreSQL/
 │   ├── 01.sql
 │   ├── 02_Ranking.sql
