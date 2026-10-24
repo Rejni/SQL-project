@@ -1,4 +1,4 @@
-# Project 01: SQL Data Analytics — Sales Analysis
+# Project 02: SQL Data Analytics — Sales Analysis
 
 A collection of SQL scripts for data exploration, analytics, and reporting, focused on sales performance, customer behavior, and product trends.
 
@@ -9,7 +9,7 @@ The goal is to practice SQL techniques commonly used in data analytics and busin
 ## Project Structure
 
 ```text
-Project 01/
+Project 02/
 ├── Database/
 │   ├── dim_customers.csv
 │   ├── dim_products.csv
