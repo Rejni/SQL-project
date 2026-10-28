@@ -47,8 +47,6 @@ Requirements: MySQL 8.0 or newer, MySQL Workbench.
 7. `03_scripts/gold/ddl_gold.sql`. Creates the gold database and the three views.
 8. `04_tests/quality_checks_gold.sql`. Checks the joins and the star schema.
 
-Both `proc_load_` files are plain scripts, not stored procedures. MySQL does not allow `LOAD DATA` inside a procedure, and the silver file uses the same simple style.
-
 ---
 
 # Data cleaning
